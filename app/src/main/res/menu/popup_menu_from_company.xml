@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menuPopEdit"
+        android:title="@string/menu_company_from_item_edit"/>
+    <item
+        android:id="@+id/menuPopDelete"
+        android:title="@string/menu_company_from_item_delete"/>
+
+</menu>

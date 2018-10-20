@@ -1,0 +1,151 @@
+<resources>
+    <string name="app_name">Petro\'s apiary</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email" translatable="false">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="check_box_remember_me">Remember me</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="error_worker_dismissed">Sorry. You are released.</string>
+
+    <!--напевно не потрібно перекладати-->
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--Ліве Меню з набором функціоналу-->
+    <string name="bar_item_group_director">Director</string>
+    <string name="bar_item_nav_workers">Workers</string>
+    <string name="bar_item_nav_company">Companies</string>
+
+    <!--Меню в списку працівників на панелі toolbar-->
+    <string name="menu_worker_list_item_add_worker_person">Add new Worker</string>
+
+    <!--Фрагмент з відображенням даних працівника-->
+    <string name="details_worker_menu_item_edit_details">Edit details</string>
+    <string name="details_worker_menu_item_dismissed_delete">Dismiss worker (delete)</string>
+    <string name="details_worker_btn_save_worker">Save</string>
+    <string name="details_worker_btn_save_worker_changes">Save changes</string>
+    <string name="details_worker_btn_save_worker_dismissed">Dismissed worker</string>
+    <string name="details_worker__worker_n">Worker № </string>
+    <string name="details_worker_company_n"> in company № </string>
+    <string name="details_worker_name">Name: </string>
+    <string name="details_worker_surname">Surame: </string>
+    <string name="details_worker_rating">Rating: </string>
+    <string name="details_worker_details">Details</string>
+    <string name="details_worker_email" translatable="false">Email: </string>
+    <string name="details_worker_password">Password: </string>
+    <string name="details_worker_phone">Phone:</string>
+    <string name="details_worker_birth_date">Birth date: </string>
+    <string name="details_worker_date_accepted">Accepted: </string>
+    <string name="details_worker_date_dismissed">Dismissed: </string>
+
+    <!-- заголовки діалогових вікон -->
+    <string name="details_worker_dialog_title_birth_day">Date of birth:</string>
+    <string name="details_worker_dialog_title_accepted">Date accepted at work:</string>
+    <string name="details_worker_dialog_title_dismissed">Date dismissed from work:</string>
+
+    <!-- додатковий текст -->
+    <!-- 1$ - вказує на 0-й елемент в переліку параметрів для вставки в рядок.
+    http://developer.alexanderklimov.ru/android/theory/resources.php -->
+    <string name="details_worker_dismissed_today">Dismissed today: %1$s</string>
+    <string name="details_worker_no_dismissed_today">now working</string>
+
+    <!-- повідомлення про неправильні дані про ПРАЦІВНИКА -->
+    <!-- ERROR MESSAGE -->
+    <string name="details_worker_error_message_short_name">
+        The name entered is too short.\n
+        Minimum 3 characters</string>
+    <string name="details_worker_error_message_short_surname">
+        The surname entered is too short.\n
+        Minimum 3 characters</string>
+    <string name="details_worker_error_message_wrong_phone">
+        Please write correct phone number.\n
+        The correct number has 10 characters,\n"
+        and (not necessarily) +380 - is country code.\n"
+        Example : 0123456789 ,\n
+        or      +380123456789
+    </string>
+    <string name="details_worker_error_message_double_phone">
+    A person %1$s %2$s with this number is already registered
+    </string>
+    <string name="details_worker_error_message_wrong_email">
+        An error occurred while sending mail.\n
+        Obligatory is the \"@\" symbol</string>
+    <string name="details_worker_error_message_double_email">
+    A person %1$s %2$s with this email is already registered
+    </string>
+    <string name="details_worker_error_message_short_pass">
+        The password you entered is too short.\n
+        Minimum of 5 characters"
+    </string>
+    <string name="details_worker_error_message_worker_not_date_birth">
+         Please enter date birth</string>
+    <string name="details_worker_error_message_worker_not_born">
+        This employee was not born yet</string>
+    <string name="details_worker_error_message_worker_young">
+        This worker is too young.\n
+        He is less than 12</string>
+    <string name="details_worker_error_message_worker_not_work">
+        This worker is not working yet</string>
+    <string name="details_worker_error_message_dismissal_more_14_days">
+        No more than 14 days for dismissal</string>
+    <string name="details_worker_error_message_dismissal_back_date">
+        Release back date</string>
+    <string name="details_worker_error_message_not_put_rating">
+        Please enter rating</string>
+    <string name="details_worker_error_message_rating_negative">
+        The rating can not be negative.\n
+        The rating should be in the range of 0-1000.\n
+        Recommended for a new employee 650-800</string>
+    <string name="details_worker_error_message_rating_too_big">
+        Rating can not be bigger than 1000.\n
+        The rating should be in the range of 0-1000.\n
+        Recommended for a new employee 650-800</string>
+
+    <!--Меню в списку КОМПАНІЙ на панелі toolbar-->
+    <string name="menu_company_list_item_add">Add new Company</string>
+    <!-- меню для кожного елемента списку КОМПАНІЙ-->
+    <string name="menu_company_from_item_edit">Edit</string>
+    <string name="menu_company_from_item_delete">Delete</string>
+
+
+    <!--Фрагмент з відображенням даних Компанії-->
+    <string name="details_company_btn_save_company">Save</string>
+    <string name="details_company_btn_save_changes_company">Save changes</string>
+    <string name="details_company_name">Name company : </string>
+    <string name="details_company_region">Region : </string>
+
+    <!-- повідомлення про неправильні дані про КОМПАНІЮ -->
+    <!-- ERROR MESSAGE -->
+    <string name="details_company_error_message_short_name">
+        The name entered is too short.\n
+        Minimum 3 characters
+    </string>
+
+    <!--Меню в списку ПАСІК на панелі toolbar-->
+    <string name="menu_apiary_list_item_add">Add new Company</string>
+    <!-- меню для кожного елемента списку ПАСІК-->
+    <!--<string name="menu_company_from_item_edit">Edit</string>-->
+    <!--<string name="menu_company_from_item_delete">Delete</string>-->
+
+    <!-- Фрагмент з відображенням даних ПАСІКИ-->
+    <string name="details_apiary_btn_save_apiary">Save</string>
+    <string name="details_apiary_btn_save_changes_apiary">Save changes</string>
+    <string name="details_apiary_name">Name apiary : </string>
+    <string name="details_apiary_region">Region : </string>
+    <string name="details_apiary_nearest_settlement">Nearest settlement : </string> <!--найближчий населений пункт-->
+    <string name="details_apiary_latitude">Latitude : </string> <!-- Широта -->
+    <string name="details_apiary_longitude">Longitude : </string> <!-- Довгота -->
+
+
+
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/edit_data_worker"
+        android:icon="@drawable/ic_menu_edit"
+        android:title="@string/details_worker_menu_item_edit_details"
+        app:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/dismiss_data_worker"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/details_worker_menu_item_dismissed_delete"
+        app:showAsAction="ifRoom|withText" />
+
+</menu>

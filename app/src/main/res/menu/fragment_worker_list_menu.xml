@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/add_worker_persone"
+        android:icon="@drawable/ic_menu_add"
+        android:title="@string/menu_worker_list_item_add_worker_person"
+        app:showAsAction="ifRoom|withText"></item>
+
+    <item
+        android:title="Далі буде ... :-)"
+        android:id="@+id/nother"
+        app:showAsAction="ifRoom"></item>
+
+</menu>
