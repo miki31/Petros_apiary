@@ -17,6 +17,8 @@ import com.apiary.sch.mykhailo.petros_apiary.model.Apiary;
  * Created by User on 19.10.2018.
  */
 
+// test git
+
 public class ApiaryDetailsFragment extends Fragment{
 
     public static final String ARG_IS_CREATE_NEW_APIARY = "is_create_new_apiary";
