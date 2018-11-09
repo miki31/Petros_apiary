@@ -27,7 +27,7 @@ import com.apiary.sch.mykhailo.petros_apiary.model.BeeCompany;
 import java.util.List;
 
 /**
- * Created by User on 18.10.2018.
+ * Created by ServerUser on 18.10.2018.
  */
 
 public class ApiaryListFragment extends Fragment {

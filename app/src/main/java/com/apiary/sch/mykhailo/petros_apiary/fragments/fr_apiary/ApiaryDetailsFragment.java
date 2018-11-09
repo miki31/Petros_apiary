@@ -8,13 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.apiary.sch.mykhailo.petros_apiary.R;
 import com.apiary.sch.mykhailo.petros_apiary.model.Apiary;
 
 /**
- * Created by User on 19.10.2018.
+ * Created by ServerUser on 19.10.2018.
  */
 
 // test git
@@ -30,8 +31,12 @@ public class ApiaryDetailsFragment extends Fragment{
     private Apiary mApiary;
 
     private Button mBtnSaveApiary;
-    private TextView mEtNameCompany;
-    private TextView mEtRegionCompany;
+//    @BindView
+    private EditText mEtNameApiary;
+    private EditText mEtRegionApiary;
+    private EditText mEtNearestSettlementApiary;
+    private EditText mEtLatitudeApiary;
+    private EditText mEtLongitudeApiary;
 
 
     public ApiaryDetailsFragment() {}
@@ -67,6 +72,6 @@ public class ApiaryDetailsFragment extends Fragment{
 
 
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }

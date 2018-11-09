@@ -6,7 +6,7 @@ import java.util.List;
 import com.apiary.sch.mykhailo.petros_apiary.model.Рull;
 
 /**
- * Created by User on 17.08.2018.
+ * Created by ServerUser on 17.08.2018.
  */
 
 /*

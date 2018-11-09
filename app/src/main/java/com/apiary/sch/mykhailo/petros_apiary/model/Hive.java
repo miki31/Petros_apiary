@@ -6,7 +6,7 @@ import com.apiary.sch.mykhailo.petros_apiary.model.part_hives.Roof;
 import com.apiary.sch.mykhailo.petros_apiary.model.part_hives.UnderRoof;
 
 /**
- * Created by User on 17.08.2018.
+ * Created by ServerUser on 17.08.2018.
  */
 
 /* вулик.

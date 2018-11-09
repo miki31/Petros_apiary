@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by User on 17.08.2018.
+ * Created by ServerUser on 17.08.2018.
  */
 
 // корпус. мітить в собі певну кількість рамок, але визначену максимальну конструкцією вулика

@@ -1,7 +1,7 @@
 package com.apiary.sch.mykhailo.petros_apiary.local_database;
 
 /**
- * Created by User on 03.09.2018.
+ * Created by ServerUser on 03.09.2018.
  */
 
 // клас з константами для доступу до БД

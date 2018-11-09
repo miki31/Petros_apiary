@@ -132,7 +132,7 @@
     </string>
 
     <!--Меню в списку ПАСІК на панелі toolbar-->
-    <string name="menu_apiary_list_item_add">Add new Company</string>
+    <string name="menu_apiary_list_item_add">Add new Apiary</string>
     <!-- меню для кожного елемента списку ПАСІК-->
     <!--<string name="menu_company_from_item_edit">Edit</string>-->
     <!--<string name="menu_company_from_item_delete">Delete</string>-->

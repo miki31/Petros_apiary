@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by User on 18.09.2018.
+ * Created by ServerUser on 18.09.2018.
  */
 
 public class User {

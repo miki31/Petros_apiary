@@ -39,16 +39,19 @@ import com.apiary.sch.mykhailo.petros_apiary.model.persone.Person;
 import com.apiary.sch.mykhailo.petros_apiary.model.persone.Worker;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.user.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import retrofit2.Response;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
- *
+ * <p>
  * Екран входу, який пропонує вхід через електронну пошту / пароль.
  */
 public class ApiaryLoginActivity
@@ -58,29 +61,14 @@ public class ApiaryLoginActivity
 
     /**
      * Id to identity READ_CONTACTS permission request.
-     *
+     * <p>
      * Ідентифікатор READ_CONTACTS для запиту дозволу.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * Манекенний магазин аутентифікації, що містить відомі імена користувачів та паролі.
-     *
-     * TODO: remove after connecting to a real authentication system.
-     * TODO: видалити після підключення до реальної системи автентифікації.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello",
-            "bar@example.com:world",
-
-
-            "test@t.com:testtt"
-    };
-
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
-     *
+     * <p>
      * Слідкуйте за запитом на вхід, щоб ми могли скасувати його за запитом.
      */
     private UserLoginTask mAuthTask = null;
@@ -91,17 +79,20 @@ public class ApiaryLoginActivity
     private CheckBox mBoxRemember;
     private View mProgressView;
     private View mLoginFormView;
-
-
     private User mUser;
+
+    TextView tvTest;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_apiary);
+
+        tvTest = findViewById(R.id.tv_test_login);
+
         // Set up the login form.
-            // Налаштуйте форму для входу.
+        // Налаштуйте форму для входу.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mEmailView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -125,14 +116,14 @@ public class ApiaryLoginActivity
         populateAutoComplete(); // перевірка можливості автозаповнення з адресної книги користувача
 
         mPasswordView = (EditText) findViewById(R.id.password);
-            // призначення прослуховувача дій вводу
+        // призначення прослуховувача дій вводу
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                        // EditorInfo.IME_ACTION_DONE --
-                        // (на віртуальній клавіатурі стрілочка вправо або sing in)
-                        // EditorInfo.IME_NULL -- кнопка enter
+                    // EditorInfo.IME_ACTION_DONE --
+                    // (на віртуальній клавіатурі стрілочка вправо або sing in)
+                    // EditorInfo.IME_NULL -- кнопка enter
                     attemptLogin(); // спроба авторизації
                     return true;
                 }
@@ -201,7 +192,7 @@ public class ApiaryLoginActivity
 
     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // метод з кнопками для спрощення тестування
-    private void quickRegistration(){
+    private void quickRegistration() {
         Button btn_enter_as_director = findViewById(R.id.btn_enter_as_director);
         Button btn_enter_as_worker = findViewById(R.id.btn_enter_as_worker);
 
@@ -252,11 +243,11 @@ public class ApiaryLoginActivity
 
     тут можна реалізувати зміну кольору заповнених форм
      */
-    private void savedUser(){
+    private void savedUser() {
 
         // отримання з БД збереженого користувача
         mUser = User.get(getApplicationContext());
-        if (mUser.getPersonUser() == null){
+        if (mUser.getPersonUser() == null) {
             return;
         }
 
@@ -270,9 +261,6 @@ public class ApiaryLoginActivity
 
 //        // для відміни фону
 //        mPasswordView.setBackground(null);
-
-
-
 
 
 //        mEmailView.setText("test@t.com");
@@ -296,7 +284,7 @@ public class ApiaryLoginActivity
     // може замовити контакти
     private boolean mayRequestContacts() {
         // якщо версія системи менша за версію  API 23
-            // M is for Marshmallow! ---> API level 23
+        // M is for Marshmallow! ---> API level 23
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
         }
@@ -330,7 +318,7 @@ public class ApiaryLoginActivity
 
     /**
      * Callback received when a permissions request has been completed.
-     *
+     * <p>
      * Здійснення зворотного дзвінка, отриманого після завершення запиту на доступ.
      */
     @Override
@@ -348,7 +336,7 @@ public class ApiaryLoginActivity
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
-     *
+     * <p>
      * Спроби ввійти або зареєструвати обліковий запис,
      * зазначений за формою входу. Якщо виникають помилки форми
      * (невірне електронне повідомлення, відсутні поля тощо),
@@ -376,12 +364,12 @@ public class ApiaryLoginActivity
         // Перевірте правильну адресу електронної пошти.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
-                                // Це поле є обов'язковим
+            // Це поле є обов'язковим
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
-                                // Ця електронна адреса недійсна
+            // Ця електронна адреса недійсна
             focusView = mEmailView;
             cancel = true;
         }
@@ -393,7 +381,7 @@ public class ApiaryLoginActivity
             // занадто короткий пароль
             focusView = mPasswordView;
             cancel = true;
-        } else if (!isPasswordValid(password)){
+        } else if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             // занадто короткий пароль
             focusView = mPasswordView;
@@ -404,14 +392,14 @@ public class ApiaryLoginActivity
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
-                // Там була помилка; не намагайтеся увійти в систему
-                // і зосередити поле першої форми з помилкою.
+            // Там була помилка; не намагайтеся увійти в систему
+            // і зосередити поле першої форми з помилкою.
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-                // Покажіть спінер прогресу (спін очікування) та запустіть фонове завдання,
-                // щоб виконати спробу входу в систему.
+            // Покажіть спінер прогресу (спін очікування) та запустіть фонове завдання,
+            // щоб виконати спробу входу в систему.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
@@ -439,7 +427,7 @@ public class ApiaryLoginActivity
 
     /**
      * Shows the progress UI and hides the login form.
-     *
+     * <p>
      * Показує користувальницький інтерфейс і приховує форму для входу.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -447,9 +435,9 @@ public class ApiaryLoginActivity
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-            // У Honeycomb MR2 ми маємо API ViewPropertyAnimator,
-            // що дозволяє дуже прості анімації. Якщо доступно,
-            // використовуйте ці інтерфейси API, щоб зменшити швидкість переміщення.
+        // У Honeycomb MR2 ми маємо API ViewPropertyAnimator,
+        // що дозволяє дуже прості анімації. Якщо доступно,
+        // використовуйте ці інтерфейси API, щоб зменшити швидкість переміщення.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources()
                     .getInteger(android.R.integer.config_shortAnimTime);
@@ -459,11 +447,11 @@ public class ApiaryLoginActivity
                     .setDuration(shortAnimTime)
                     .alpha(show ? 0 : 1)
                     .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                        }
+                    });
 
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
@@ -476,12 +464,20 @@ public class ApiaryLoginActivity
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-                // API ViewPropertyAnimator недоступні,
-                // тому просто показуйте та приховуйте відповідні
-                // компоненти інтерфейсу користувача.
+            // API ViewPropertyAnimator недоступні,
+            // тому просто показуйте та приховуйте відповідні
+            // компоненти інтерфейсу користувача.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+
+//////////////////////////////////////////////
+///            // TODO: цей компонент пізніше видалити
+        tvTest.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    private void testMessage(String message) {
+        tvTest.setText(message);
     }
 
     // напевне для отримання доступу до даних на пристрої
@@ -554,12 +550,14 @@ public class ApiaryLoginActivity
 
     /**
      * Represents an asynchronous login/registration task used to authenticate the user.
-     *
+     * <p>
      * Представляє асинхронне завдання входу / реєстрації,
      * яке використовується для автентифікації користувача.
      * http://developer.alexanderklimov.ru/android/theory/asynctask.php --> опис класу
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+
+        Response response = null;
 
         private final String mEmail;
         private final String mPassword;
@@ -578,12 +576,37 @@ public class ApiaryLoginActivity
             // TODO: спробу автентифікації проти служби мережі.
 
 
-
-            if (isOnline()){
+            if (isOnline()) {
                 // true - є підключення
                 // TODO: тут запит в нет з перевіркою існування логіна і пароля
                 // TODO: Цей пункт реалізовувати коли буде робоча ф-я (API) сервера
-                Log.d(TAG, "зєднання з мережею встановлено");
+                Log.d(TAG, "з'єднання з мережею встановлено");
+
+                // запит в нет для отримання користувача (автентфікація)
+                try {
+                    response = App
+                            .getServerLoginApi()
+                            .getLogin("nazar", "nazar")
+                            .execute();
+
+//                    testMessage("" + response);
+//                    tvTest.setText(tvTest.getText() + " : \n" + response);
+                } catch (Exception e) {
+//                    tvTest.setText(tvTest.getText() + " e " + e.toString());
+                }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+                // TODO: для тестування (видалити)
+                Log.d(TAG, "з'єднання з мережею встановлено, але покищо імітація його відсутності");
+
+                mPerson = User.get(getApplicationContext()).getPersonByEmail(mEmail);
+
+                if (mPerson != null) {
+                    Log.d(TAG, "знайдено користувача : " + mPerson.getName());
+                }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
             } else {
                 // false - нема підключення
                 // TODO: тут запит до локальної БД і пошук користувача в ній
@@ -598,14 +621,13 @@ public class ApiaryLoginActivity
             }
 
 
-
-            try {
-                // Simulate network access.
-                // Симуляція роботи мережі
-                Thread.sleep(500);// 2000 --> щоб пришвидшити тестування зменшив !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            } catch (InterruptedException e) {
-                return false;
-            }
+//            try {
+//                // Simulate network access.
+//                // Симуляція роботи мережі
+//                Thread.sleep(1000);// 2000 --> щоб пришвидшити тестування зменшив !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//            } catch (InterruptedException e) {
+//                return false;
+//            }
 
             // TODO: цей цикл видалити після реалізації всіх запитів з перевіркою
 //            for (String credential : DUMMY_CREDENTIALS) {
@@ -622,13 +644,13 @@ public class ApiaryLoginActivity
 
             if (mPerson != null && mPassword.equals(mPerson.getPass())) {
                 // перевірка чи не звільнений працівник
-                if (mPerson instanceof Worker){
+                if (mPerson instanceof Worker) {
                     Worker worker = (Worker) mPerson;
                     Calendar dateDismissed = worker.getDismissedFromWork();
-                    if (dateDismissed != null){
+                    if (dateDismissed != null) {
                         Calendar nowDate = new GregorianCalendar();
                         long dTime = nowDate.getTimeInMillis() - dateDismissed.getTimeInMillis();
-                        if (dTime > 0){
+                        if (dTime > 0) {
                             dismissed = true;
                             return false;
                         }
@@ -658,6 +680,28 @@ public class ApiaryLoginActivity
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            if (response == null) {
+                testMessage(" null");
+//                    tvTest.setText(tvTest.getText() + );
+            } else {
+                testMessage("\n\n code:__ " + response.code()
+//                            + "\n message : " + response.message()
+//                            + "\n isSuccessful : " + response.isSuccessful()
+//                            + "\n headers : " + response.headers()
+//                            + "\n body : " + response.body()
+//                            + "\n hashCode : " + response.hashCode()
+//                            + "\n toString : " + response.toString());
+                );
+            }
+
+            try {
+                // Simulate network access.
+                // Симуляція роботи мережі
+                Thread.sleep(10000);// 2000 --> щоб пришвидшити тестування зменшив !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            } catch (InterruptedException e) {
+                return;
+            }
+
             mAuthTask = null;
             showProgress(false);
 
@@ -665,10 +709,10 @@ public class ApiaryLoginActivity
                 // TODO: тут реалізовуэться запуск наступної активності
                 /*
                 TODO: оскільки з БД ортимано підтвердження дійсності існування користувача
-                TODO: Створення або зміна обєкта User
+                TODO: Створення або зміна обєкта ServerUser
                 TODO: Запис користувача в локальну БД, якщо його нема
                  */
-//                User.get(getApplicationContext()).setPersonUser(mPerson);
+//                ServerUser.get(getApplicationContext()).setPersonUser(mPerson);
                 User.get(getApplicationContext()).savePerson(mPerson, mBoxRemember.isChecked());
 
                 Log.d(TAG, " нашого користувача буде збережено --> " + mBoxRemember.isChecked());
@@ -676,7 +720,7 @@ public class ApiaryLoginActivity
                 createNewActivity();
                 finish();
             } else {
-                if (dismissed){
+                if (dismissed) {
                     mPasswordView.setError(getString(R.string.error_worker_dismissed));
                 } else {
                     mPasswordView.setError(getString(R.string.error_incorrect_password));
@@ -691,7 +735,7 @@ public class ApiaryLoginActivity
             showProgress(false);
         }
 
-        private void createNewActivity(){
+        private void createNewActivity() {
             Intent intent = new Intent(getApplication(), ApiaryMainActivity.class);
             startActivity(intent);
         }

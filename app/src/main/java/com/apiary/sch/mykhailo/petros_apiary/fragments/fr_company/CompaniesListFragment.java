@@ -30,7 +30,7 @@ import com.apiary.sch.mykhailo.petros_apiary.model.BeeCompany;
 import java.util.List;
 
 /**
- * Created by User on 11.10.2018.
+ * Created by ServerUser on 11.10.2018.
  */
 
 public class CompaniesListFragment extends Fragment {

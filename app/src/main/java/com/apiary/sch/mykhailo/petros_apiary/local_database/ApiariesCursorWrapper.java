@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by User on 04.09.2018.
+ * Created by ServerUser on 04.09.2018.
  */
 
 // цей клас призначений не для того

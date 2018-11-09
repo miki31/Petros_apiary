@@ -19,6 +19,16 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/tv_test_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="результат автентифікації"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="154dp"
+        tools:ignore="MissingConstraints"
+        android:visibility="gone" />
+
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"

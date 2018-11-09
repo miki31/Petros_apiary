@@ -38,7 +38,6 @@ public class ApiaryMainActivity extends AppCompatActivity
 //    private TextView mTest;
     // перевірити чи це потрібно
     //////////////////////////////////////////////////////////////////
-    private List<TestRemind> mItems;
     private WorkersListFragment workersListFragment;
     public List<Fragment> mFragmentList;
     ////////////////////////////////////////////////////////////////////
@@ -124,7 +123,7 @@ public class ApiaryMainActivity extends AppCompatActivity
 //        }
 
 //        mTest.setText(text);
-//        mTest.setText("bla-bla-bla " + User.get(getApplicationContext()).getPersonUser().getName() +
+//        mTest.setText("bla-bla-bla " + ServerUser.get(getApplicationContext()).getPersonUser().getName() +
 //                "\n" + User.get(getApplicationContext()).getPersonUser().getClass().getSimpleName()
 //        + "\n" + User.get(getApplicationContext()).getPersonUser().getClass().getName());
 //        workersListFragment = WorkersListFragment.newInstance();
@@ -292,33 +291,5 @@ public class ApiaryMainActivity extends AppCompatActivity
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-
-    private class ReminderItemTask extends AsyncTask<Void, Void, List<TestRemind>> {
-
-        @SuppressLint("LongLogTag")
-        @Override
-        protected List<TestRemind> doInBackground(Void... voids) {
-//            Log.d(TAG, "працює");
-
-//            try {
-//                String result = new FlickrFetchr()
-//                        .getUrlString("https://www.bignerdranch.com");
-//                Log.i(TAG, "Fetched contents of URL: " + result);
-//            } catch (IOException ioe) {
-//                Log.e(TAG, "Failed to fetch URL: ", ioe);
-//            }
-
-            return new TestConectServer().fetchItems();
-
-//            return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<TestRemind> items) {
-            mItems = items;
-
-        }
     }
 }

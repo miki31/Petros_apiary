@@ -59,4 +59,13 @@
     <string name="details_company_error_message_short_name">Це ім\'я надто коротке.\nМінімум 3 символи.</string>
     <string name="menu_company_from_item_edit">Редагувати</string>
     <string name="menu_company_from_item_delete">Видалити</string>
+    <string name="details_company_btn_save_changes_company">Зберегти зміни</string>
+    <string name="menu_apiary_list_item_add">Додати гову пасіку</string>
+    <string name="details_apiary_btn_save_apiary">Зберегти</string>
+    <string name="details_apiary_btn_save_changes_apiary">Зберегти зміни</string>
+    <string name="details_apiary_name">Назва пасіки :</string>
+    <string name="details_apiary_region">Регіон :</string>
+    <string name="details_apiary_nearest_settlement">Найближче поселення :</string>
+    <string name="details_apiary_latitude">Широта :</string>
+    <string name="details_apiary_longitude">Довгота :</string>
 </resources>

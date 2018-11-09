@@ -1,7 +1,7 @@
 package com.apiary.sch.mykhailo.petros_apiary.model;
 
 /**
- * Created by User on 17.08.2018.
+ * Created by ServerUser on 17.08.2018.
  */
 
 // рамка з вощиною

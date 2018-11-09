@@ -1,7 +1,7 @@
 package com.apiary.sch.mykhailo.petros_apiary.model.persone;
 
 /**
- * Created by User on 04.09.2018.
+ * Created by ServerUser on 04.09.2018.
  */
 /*
     ПЕРСОНА - основні дані про особу
