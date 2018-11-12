@@ -15,4 +15,6 @@
 
     <color name="colorBackgroundTranslucent">#1e948f03</color>
 
+    <color name="icon_color1">#EDCE95</color>
+    <color name="icon_color2">#EDB64F</color>
 </resources>
