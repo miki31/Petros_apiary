@@ -21,7 +21,8 @@
 
     <TextView
         android:id="@+id/tv_test_login"
-        android:layout_width="wrap_content"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="результат автентифікації"
         tools:layout_editor_absoluteX="0dp"

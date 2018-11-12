@@ -39,7 +39,7 @@ import com.apiary.sch.mykhailo.petros_apiary.model.persone.Person;
 import com.apiary.sch.mykhailo.petros_apiary.model.persone.Worker;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.user.User;
 
-import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -476,8 +476,12 @@ public class ApiaryLoginActivity
         tvTest.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
+    //TODO: для тестування видалити
     private void testMessage(String message) {
         tvTest.setText(message);
+        tvTest.invalidate();
+//        tvTest.setVisibility(View.GONE);
+//        tvTest.setVisibility(View.VISIBLE);
     }
 
     // напевне для отримання доступу до даних на пристрої
@@ -557,7 +561,10 @@ public class ApiaryLoginActivity
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        Response response = null;
+        Response mResponse = null;
+
+        private final String mLoginServ;
+        private final String mPassServ;
 
         private final String mEmail;
         private final String mPassword;
@@ -568,6 +575,8 @@ public class ApiaryLoginActivity
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
+            mLoginServ = "nazar";
+            mPassServ = "nazar";
         }
 
         @Override
@@ -575,28 +584,43 @@ public class ApiaryLoginActivity
             // TODO: attempt authentication against a network service.
             // TODO: спробу автентифікації проти служби мережі.
 
+            boolean respondServer = true;
 
             if (isOnline()) {
-                // true - є підключення
+                // true - є підключення  до сервера
                 // TODO: тут запит в нет з перевіркою існування логіна і пароля
                 // TODO: Цей пункт реалізовувати коли буде робоча ф-я (API) сервера
                 Log.d(TAG, "з'єднання з мережею встановлено");
 
                 // запит в нет для отримання користувача (автентфікація)
                 try {
-                    response = App
+                    mResponse = App
                             .getServerLoginApi()
-                            .getLogin("nazar", "nazar")
+                            .getLogin(mLoginServ, mPassServ)
                             .execute();
-
-//                    testMessage("" + response);
-//                    tvTest.setText(tvTest.getText() + " : \n" + response);
+                    testResultConnect();  //TODO: для тестування коду -- видалити
                 } catch (Exception e) {
-//                    tvTest.setText(tvTest.getText() + " e " + e.toString());
+                    e.printStackTrace();
                 }
 
+                //TODO: для тестування коду
+                try {
+                    // Simulate network access.
+                    // Симуляція роботи мережі
+                    Thread.sleep(5000);// 2000 --> щоб пришвидшити тестування зменшив !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // перевірка результату запиту
+                // 200 - HTTP_OK      404 - HTTP_NOT_FOUND помилка (повернути на вікно авторизації)
+                if (mResponse.code() == HttpURLConnection.HTTP_OK) {
+                    respondServer = true;
+                } else if (mResponse.code() == HttpURLConnection.HTTP_NOT_FOUND) {
+                    respondServer = false;
+                }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+                Log.d(TAG, "з'єднання з мережею встановлено відповідь сервера : " + mResponse.code());
                 // TODO: для тестування (видалити)
                 Log.d(TAG, "з'єднання з мережею встановлено, але покищо імітація його відсутності");
 
@@ -608,7 +632,7 @@ public class ApiaryLoginActivity
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
             } else {
-                // false - нема підключення
+                // false - нема підключення до сервера
                 // TODO: тут запит до локальної БД і пошук користувача в ній
 
                 Log.d(TAG, "зєднання з мережею ВІДСУТНЄ");
@@ -620,29 +644,11 @@ public class ApiaryLoginActivity
                 }
             }
 
-
-//            try {
-//                // Simulate network access.
-//                // Симуляція роботи мережі
-//                Thread.sleep(1000);// 2000 --> щоб пришвидшити тестування зменшив !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//            } catch (InterruptedException e) {
-//                return false;
-//            }
-
-            // TODO: цей цикл видалити після реалізації всіх запитів з перевіркою
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mEmail)) {
-//                    // Account exists, return true if the password matches.
-//                    // Обліковий запис існує, поверніться істинно, якщо пароль відповідає.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
-
             // TODO: register the new account here.
             // TODO: зареєструйте новий обліковий запис тут. (обдумати доцільність реєстрації)
 
-            if (mPerson != null && mPassword.equals(mPerson.getPass())) {
+            if (respondServer &&
+                    (mPerson != null && mPassword.equals(mPerson.getPass()))) {
                 // перевірка чи не звільнений працівник
                 if (mPerson instanceof Worker) {
                     Worker worker = (Worker) mPerson;
@@ -662,6 +668,17 @@ public class ApiaryLoginActivity
             }
         }
 
+        private void testResultConnect() {
+            ///// TODO: тестування і виведення на екран
+            if (mResponse == null) {
+                testMessage(" null" + " __: code server answer ");
+            } else {
+                String code = String.valueOf(mResponse.code());
+                String sCode = code + " __: code server answer ";
+                testMessage(sCode);
+            }
+        }
+
         // метод для перевірки доступу до інтернету
             /*
             Некоторые особенности
@@ -676,32 +693,12 @@ public class ApiaryLoginActivity
                     (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             return netInfo != null && netInfo.isConnectedOrConnecting();
+
+            // метод для перевірки доступу до мережі з книжки ст.550
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            if (response == null) {
-                testMessage(" null");
-//                    tvTest.setText(tvTest.getText() + );
-            } else {
-                testMessage("\n\n code:__ " + response.code()
-//                            + "\n message : " + response.message()
-//                            + "\n isSuccessful : " + response.isSuccessful()
-//                            + "\n headers : " + response.headers()
-//                            + "\n body : " + response.body()
-//                            + "\n hashCode : " + response.hashCode()
-//                            + "\n toString : " + response.toString());
-                );
-            }
-
-            try {
-                // Simulate network access.
-                // Симуляція роботи мережі
-                Thread.sleep(10000);// 2000 --> щоб пришвидшити тестування зменшив !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            } catch (InterruptedException e) {
-                return;
-            }
-
             mAuthTask = null;
             showProgress(false);
 
