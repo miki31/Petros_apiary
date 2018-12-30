@@ -3,6 +3,7 @@ package com.apiary.sch.mykhailo.petros_apiary;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.CursorLoader;
@@ -28,6 +29,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -157,6 +159,7 @@ public class ApiaryLoginActivity
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                hideKeyboard();
                 attemptLogin(); // спроба авторизації
             }
         });
@@ -549,6 +552,19 @@ public class ApiaryLoginActivity
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
+    }
+
+    // метод для закриття клавіатури
+    public void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) this
+                .getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = this.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 

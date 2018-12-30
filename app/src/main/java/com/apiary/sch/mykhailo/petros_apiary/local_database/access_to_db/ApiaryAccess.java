@@ -1,5 +1,6 @@
 package com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -59,6 +60,13 @@ public class ApiaryAccess {
         return apiaries;
     }
 
+    public void addApiary(Apiary apiary){
+        ContentValues values = getContentValues(apiary);
+        mDatabase.insert(
+                ApiarisDatabaseSchema.TableApiaries.NAME_TABLE_APIARIES,
+                null, values);
+    }
+
     private ApiariesCursorWrapper queryApiary(
             String whereClause, String[] whereArgs){
         Cursor cursor = mDatabase.query(
@@ -71,5 +79,26 @@ public class ApiaryAccess {
                 null
         );
         return new ApiariesCursorWrapper(cursor);
+    }
+
+    private static ContentValues getContentValues(Apiary apiary){
+        ContentValues values = new ContentValues();
+
+        values.put(ApiarisDatabaseSchema.TableApiaries.Cols.COMPANY_ID,
+                apiary.getIdCompany());
+        values.put(ApiarisDatabaseSchema.TableApiaries.Cols.DIRECTOR_ID,
+                apiary.getIdDirector());
+        values.put(ApiarisDatabaseSchema.TableApiaries.Cols.NAME_APIARY,
+                apiary.getNameApiary());
+        values.put(ApiarisDatabaseSchema.TableApiaries.Cols.REGION,
+                apiary.getRegion());
+        values.put(ApiarisDatabaseSchema.TableApiaries.Cols.NEAREST_SETTLEMENT,
+                apiary.getNearestSettlement());
+        values.put(ApiarisDatabaseSchema.TableApiaries.Cols.LATITUDE,
+                apiary.getLatitude());
+        values.put(ApiarisDatabaseSchema.TableApiaries.Cols.LONGITUDE,
+                apiary.getLongitude());
+
+        return values;
     }
 }

@@ -68,4 +68,6 @@
     <string name="details_apiary_nearest_settlement">Найближче поселення :</string>
     <string name="details_apiary_latitude">Широта :</string>
     <string name="details_apiary_longitude">Довгота :</string>
+    <string name="details_apiary_error_message_short_name">"         Назва занадто коротка.          Мінімум 3 символи     "</string>
+    <string name="details_apiary_error_message_coordint_error">"         Невірні координати     "</string>
 </resources>

@@ -88,7 +88,7 @@ public class ApiaryListFragment extends Fragment {
                         fragmentManager.beginTransaction();
 
                 ApiaryDetailsFragment detailsFragment =
-                        ApiaryDetailsFragment.newInstance();
+                        ApiaryDetailsFragment.newInstance(mBeeCompany);
 
                 Bundle args = new Bundle();
                 args.putBoolean(ApiaryDetailsFragment.ARG_IS_CREATE_NEW_APIARY, true);

@@ -146,6 +146,10 @@
     <string name="details_apiary_latitude">Latitude : </string> <!-- Широта -->
     <string name="details_apiary_longitude">Longitude : </string> <!-- Довгота -->
 
+    <!-- повідомлення про неправильні дані про ПАСІКУ -->
+    <!-- ERROR MESSAGE -->
+    <string name="details_apiary_error_message_coordint_error">"         Coordinates are incorrect     "</string>
+    <string name="details_apiary_error_message_short_name">"         The name entered is too short.          Minimum 3 characters     "</string>
 
 
 </resources>
