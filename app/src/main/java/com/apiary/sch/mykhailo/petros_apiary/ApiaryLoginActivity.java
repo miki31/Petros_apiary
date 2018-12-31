@@ -554,7 +554,7 @@ public class ApiaryLoginActivity
         int IS_PRIMARY = 1;
     }
 
-    // метод для закриття клавіатури
+    //// метод для закриття клавіатури
     public void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) this
                 .getSystemService(Activity.INPUT_METHOD_SERVICE);
