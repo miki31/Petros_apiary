@@ -5,6 +5,7 @@ import android.database.CursorWrapper;
 
 import com.apiary.sch.mykhailo.petros_apiary.model.Apiary;
 import com.apiary.sch.mykhailo.petros_apiary.model.BeeCompany;
+import com.apiary.sch.mykhailo.petros_apiary.model.Point;
 import com.apiary.sch.mykhailo.petros_apiary.model.persone.Director;
 import com.apiary.sch.mykhailo.petros_apiary.model.persone.Worker;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.user.User;
@@ -198,5 +199,28 @@ public class ApiariesCursorWrapper extends CursorWrapper {
             apiary.setLongitude(longitude.doubleValue());
 
         return apiary;
+    }
+
+    public Point getPoint(){
+        Point point = new Point();
+
+        long idPoint = getLong(getColumnIndex(
+                ApiarisDatabaseSchema.TablePoints.Cols._ID));
+        long idApiary = getLong(getColumnIndex(
+                ApiarisDatabaseSchema.TablePoints.Cols.APIARY_ID));
+        long idDirector = getLong(getColumnIndex(
+                ApiarisDatabaseSchema.TablePoints.Cols.DIRECTOR_ID));
+        String name = getString(getColumnIndex(
+                ApiarisDatabaseSchema.TablePoints.Cols.NAME_POINT));
+        String position = getString(getColumnIndex(
+                ApiarisDatabaseSchema.TablePoints.Cols.POSITION_POINT));
+
+        point.setIdPoint(idPoint);
+        point.setIdApiary(idApiary);
+        point.setIdDirector(idDirector);
+        point.setName(name);
+        point.setPosition(position);
+
+        return point;
     }
 }

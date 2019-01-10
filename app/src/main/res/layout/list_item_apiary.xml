@@ -29,7 +29,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="company name"
+            android:text="apiary name"
             android:textColor="@android:color/black"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
             android:layout_marginTop="8dp"
             android:text="region"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/company_name"
+            app:layout_constraintTop_toBottomOf="@+id/apiary_name"
             tools:layout_conversion_absoluteHeight="19dp"
             tools:layout_conversion_absoluteWidth="368dp" />
 
@@ -59,7 +59,7 @@
             android:layout_marginTop="8dp"
             android:text="nearest settlement"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/company_name"
+            app:layout_constraintTop_toBottomOf="@+id/apiary_name"
             tools:layout_conversion_absoluteHeight="19dp"
             tools:layout_conversion_absoluteWidth="368dp" />
 
@@ -67,7 +67,7 @@
 
     <ImageButton
         android:layout_weight="0"
-        android:id="@+id/im_btn_menu_from_item"
+        android:id="@+id/im_btn_apiary_menu_from_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

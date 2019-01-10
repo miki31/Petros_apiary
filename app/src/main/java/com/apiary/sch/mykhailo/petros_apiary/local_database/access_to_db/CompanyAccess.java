@@ -60,18 +60,20 @@ public class CompanyAccess {
         return beeCompanies;
     }
 
-    public void addCompany(BeeCompany company) {
+    public long addCompany(BeeCompany company) {
         ContentValues values = getContentValues(company);
-        mDatabase.insert(ApiarisDatabaseSchema.TableCompanies.NAME_TABLE_COMPANIES,
+        return mDatabase.insert(
+                ApiarisDatabaseSchema.TableCompanies.NAME_TABLE_COMPANIES,
                 null, values);
     }
 
-    public void updateCompany(BeeCompany company){
+    public void updateCompany(BeeCompany company) {
         ContentValues values = getContentValues(company);
         mDatabase.update(ApiarisDatabaseSchema.TableCompanies.NAME_TABLE_COMPANIES,
                 values,
                 ApiarisDatabaseSchema.TableCompanies.Cols._ID + " = ?",
-                new String[]{String.valueOf(company.getIdCompany())});
+                new String[]{String.valueOf(company.getIdCompany())}
+        );
     }
 
     private ApiariesCursorWrapper queryCompany(

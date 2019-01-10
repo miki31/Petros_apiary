@@ -3,33 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayoutItemCompany"
+    android:id="@+id/linearLayoutItemPoint"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp"
-    >
+    android:padding="8dp">
 
-    <!--
-
-    tools:layout_editor_absoluteY="81dp"
-
-    -->
     <LinearLayout
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/company_name"
+            android:id="@+id/point_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="company name"
+            android:text="point name"
             android:textColor="@android:color/black"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,22 +31,24 @@
             tools:layout_conversion_absoluteWidth="368dp" />
 
         <TextView
-            android:id="@+id/company_region"
+            android:id="@+id/point_position"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="region"
+            android:text="position"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/company_name"
+            app:layout_constraintTop_toBottomOf="@+id/point_name"
             tools:layout_conversion_absoluteHeight="19dp"
             tools:layout_conversion_absoluteWidth="368dp" />
+
+
     </LinearLayout>
 
     <ImageButton
         android:layout_weight="0"
-        android:id="@+id/im_btn_company_menu_from_item"
+        android:id="@+id/im_btn_point_menu_from_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

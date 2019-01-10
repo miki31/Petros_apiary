@@ -23,19 +23,19 @@ public class ApiaryAccess {
     private Context mContext;
     private SQLiteDatabase mDatabase;
 
-    private ApiaryAccess(Context context){
+    private ApiaryAccess(Context context) {
         mContext = context.getApplicationContext();
         mDatabase = new DBHelper(mContext).getWritableDatabase();
     }
 
-    public static ApiaryAccess get(Context context){
-        if (sApiaryAccess == null){
+    public static ApiaryAccess get(Context context) {
+        if (sApiaryAccess == null) {
             sApiaryAccess = new ApiaryAccess(context);
         }
         return sApiaryAccess;
     }
 
-    public List<Apiary> getApiariesByCompanyId(long id){
+    public List<Apiary> getApiariesByCompanyId(long id) {
         List<Apiary> apiaries = new ArrayList<>();
 
         String nameParameter = ApiarisDatabaseSchema.TableApiaries.Cols.COMPANY_ID;
@@ -46,9 +46,9 @@ public class ApiaryAccess {
         );
 
         try {
-            if (cursor.getCount() != 0){
+            if (cursor.getCount() != 0) {
                 cursor.moveToFirst();
-                while (!cursor.isAfterLast()){
+                while (!cursor.isAfterLast()) {
                     apiaries.add(cursor.getApiary());
                     cursor.moveToNext();
                 }
@@ -60,15 +60,25 @@ public class ApiaryAccess {
         return apiaries;
     }
 
-    public void addApiary(Apiary apiary){
+    public long addApiary(Apiary apiary) {
         ContentValues values = getContentValues(apiary);
-        mDatabase.insert(
+        return mDatabase.insert(
                 ApiarisDatabaseSchema.TableApiaries.NAME_TABLE_APIARIES,
                 null, values);
     }
 
+    public void updateApiary(Apiary apiary) {
+        ContentValues values = getContentValues(apiary);
+        mDatabase.update(
+                ApiarisDatabaseSchema.TableApiaries.NAME_TABLE_APIARIES,
+                values,
+                ApiarisDatabaseSchema.TableApiaries.Cols._ID + " = ?",
+                new String[]{String.valueOf(apiary.getIdApiary())}
+        );
+    }
+
     private ApiariesCursorWrapper queryApiary(
-            String whereClause, String[] whereArgs){
+            String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 ApiarisDatabaseSchema.TableApiaries.NAME_TABLE_APIARIES,
                 null,
@@ -81,7 +91,7 @@ public class ApiaryAccess {
         return new ApiariesCursorWrapper(cursor);
     }
 
-    private static ContentValues getContentValues(Apiary apiary){
+    private static ContentValues getContentValues(Apiary apiary) {
         ContentValues values = new ContentValues();
 
         values.put(ApiarisDatabaseSchema.TableApiaries.Cols.COMPANY_ID,

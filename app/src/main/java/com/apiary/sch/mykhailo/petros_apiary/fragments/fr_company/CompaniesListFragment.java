@@ -154,7 +154,8 @@ public class CompaniesListFragment extends Fragment {
             mCompanyNameTV = (TextView) itemView.findViewById(R.id.company_name);
             mCompanyRegionTV = (TextView) itemView.findViewById(R.id.company_region);
             if (User.get(getActivity()).isDirector()) {
-                mImgBtnMenuFromItem = (ImageButton) itemView.findViewById(R.id.im_btn_menu_from_item);
+                mImgBtnMenuFromItem = (ImageButton)
+                        itemView.findViewById(R.id.im_btn_company_menu_from_item);
                 mImgBtnMenuFromItem.setVisibility(View.VISIBLE);
                 mImgBtnMenuFromItem.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -173,7 +174,7 @@ public class CompaniesListFragment extends Fragment {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
                     switch (item.getItemId()) {
-                        case R.id.menuPopEdit:
+                        case R.id.menuPopCompanyEdit:
                             Toast.makeText(getContext(), "Змінити",
                                     Toast.LENGTH_LONG).show();
 
@@ -195,7 +196,7 @@ public class CompaniesListFragment extends Fragment {
 
                             return true;
 
-                        case R.id.menuPopDelete:
+                        case R.id.menuPopCompanyDelete:
                             Toast.makeText(getContext(), "видалити.\n" +
                                             "Треба створити перевірку запитання чи дійсно видалити",
                                     Toast.LENGTH_LONG).show();
@@ -216,7 +217,9 @@ public class CompaniesListFragment extends Fragment {
             mCompanyNameTV.setText(mBeeCompany.getNameCompany());
             mCompanyRegionTV.setText(mBeeCompany.getRegion());
 
-            if (backgroundColor == NOT_BACKGROUND_COLOR) {return;}
+            if (backgroundColor == NOT_BACKGROUND_COLOR) {
+                return;
+            }
 
             ColorDrawable colorDrawable = new ColorDrawable();
             switch (backgroundColor) {

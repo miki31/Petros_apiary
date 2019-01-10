@@ -70,4 +70,6 @@
     <string name="details_apiary_longitude">Довгота :</string>
     <string name="details_apiary_error_message_short_name">"         Назва занадто коротка.          Мінімум 3 символи     "</string>
     <string name="details_apiary_error_message_coordint_error">"         Невірні координати     "</string>
+    <string name="menu_apiary_from_item_edit">Редаувати</string>
+    <string name="menu_apiary_from_item_delete">Видалити</string>
 </resources>

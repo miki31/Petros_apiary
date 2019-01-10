@@ -16,7 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.apiary.sch.mykhailo.petros_apiary.R;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.ApiaryAccess;
@@ -88,7 +91,7 @@ public class ApiaryListFragment extends Fragment {
                         fragmentManager.beginTransaction();
 
                 ApiaryDetailsFragment detailsFragment =
-                        ApiaryDetailsFragment.newInstance(mBeeCompany);
+                        ApiaryDetailsFragment.newInstance(mBeeCompany, null);
 
                 Bundle args = new Bundle();
                 args.putBoolean(ApiaryDetailsFragment.ARG_IS_CREATE_NEW_APIARY, true);
@@ -129,7 +132,9 @@ public class ApiaryListFragment extends Fragment {
     }
 
 
-    private class ApiaryHolder extends RecyclerView.ViewHolder {
+    private class ApiaryHolder
+            extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
         public static final int NOT_BACKGROUND_COLOR = -1;
         private Apiary mApiary;
@@ -137,6 +142,7 @@ public class ApiaryListFragment extends Fragment {
         private TextView mApiaryNameTV;
         private TextView mApiaryRegionTV;
         private TextView mApiaryNearestSettlementTV;
+        private ImageButton mImgBtnMenuFromItem;
         private int mResourceBackgroundColor;
 
         public ApiaryHolder(View itemView) {
@@ -154,6 +160,62 @@ public class ApiaryListFragment extends Fragment {
             mApiaryRegionTV = (TextView) itemView.findViewById(R.id.apiary_region);
             mApiaryNearestSettlementTV =
                     (TextView) itemView.findViewById(R.id.apiary_nearest_settlement);
+            if (User.get(getActivity()).isDirector()) {
+                mImgBtnMenuFromItem = (ImageButton)
+                        itemView.findViewById(R.id.im_btn_apiary_menu_from_item);
+                mImgBtnMenuFromItem.setVisibility(View.VISIBLE);
+                mImgBtnMenuFromItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopupMenu(v);
+                    }
+                });
+            }
+        }
+
+        private void showPopupMenu(View v) {
+            PopupMenu menu = new PopupMenu(getContext(), v);
+            menu.inflate(R.menu.popup_menu_from_apiary);
+
+            menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.menuPopApiaryEdit:
+                            Toast.makeText(getContext(), "Змінити",
+                                    Toast.LENGTH_LONG).show();
+
+                            FragmentManager fragmentManager =
+                                    getActivity().getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction =
+                                    fragmentManager.beginTransaction();
+
+                            ApiaryDetailsFragment detailsFragment =
+                                    ApiaryDetailsFragment.newInstance(mBeeCompany, mApiary);
+
+                            Bundle args = new Bundle();
+                            args.putBoolean(ApiaryDetailsFragment.ARG_IS_EDIT_DATA_APIARY, true);
+                            detailsFragment.setArguments(args);
+
+                            fragmentTransaction.replace(R.id.fragment_container, detailsFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+
+                            return true;
+
+                        case R.id.menuPopApiaryDelete:
+                            Toast.makeText(getContext(), "видалити.\n" +
+                                            "Треба створити перевірку запитання чи дійсно видалити",
+                                    Toast.LENGTH_LONG).show();
+                            return true;
+
+                        default:
+                            return false;
+                    }
+                }
+            });
+
+            menu.show();
         }
 
         @SuppressLint("ResourceType")
@@ -184,6 +246,14 @@ public class ApiaryListFragment extends Fragment {
             colorDrawable.setColor(mResourceBackgroundColor);
             int color = colorDrawable.getColor();
             itemView.setBackgroundColor(color);
+        }
+
+        @Override
+        public void onClick(View view) {
+            // TODO: перехід до вибору нищого рівня по ієрархії моделі даних
+
+            // TODO: при потребі тут створити і передати фрагменту бандл
+
         }
     }
 

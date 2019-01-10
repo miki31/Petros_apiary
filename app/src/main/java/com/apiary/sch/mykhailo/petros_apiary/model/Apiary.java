@@ -21,10 +21,22 @@ public class Apiary {
     private double mLatitude; // широта
     private double mLongitude; // довгота
 
-    private List<Points> mPoints;  // Points -- точки
+    private List<Point> mPoints;  // Point -- точки
 
     public Apiary() {
-        mPoints = new ArrayList<Points>();
+        mPoints = new ArrayList<Point>();
+    }
+
+    private Apiary(Apiary apiary){
+        mIdApiary = apiary.mIdApiary;
+        mIdDirector = apiary.mIdDirector;
+        mIdCompany = apiary.mIdCompany;
+        mNameApiary = apiary.mNameApiary;
+        mRegion = apiary.mRegion;
+        mNearestSettlement = apiary.mNearestSettlement;
+        mLatitude = apiary.mLatitude;
+        mLongitude = apiary.mLongitude;
+        mPoints = new ArrayList<Point>();
     }
 
     public long getIdApiary() {
@@ -67,11 +79,11 @@ public class Apiary {
         mRegion = region;
     }
 
-    public List<Points> getPoints() {
+    public List<Point> getPoints() {
         return mPoints;
     }
 
-    public void setPoints(List<Points> points) {
+    public void setPoints(List<Point> points) {
         mPoints = points;
     }
 
@@ -97,5 +109,10 @@ public class Apiary {
 
     public void setLongitude(double longitude) {
         mLongitude = longitude;
+    }
+
+    public Apiary copy(){
+        Apiary apiary = new Apiary(this);
+        return apiary;
     }
 }

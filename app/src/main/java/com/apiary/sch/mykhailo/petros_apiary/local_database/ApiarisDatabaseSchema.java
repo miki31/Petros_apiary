@@ -77,4 +77,16 @@ public class ApiarisDatabaseSchema {
             public static final String LONGITUDE = "longitude";  // довгота
         }
     }
+
+    public static final class TablePoints {
+        public static final String NAME_TABLE_POINTS = "points";
+
+        public static final class Cols {
+            public static final String _ID = "_id_point";
+            public static final String DIRECTOR_ID = "director_id";
+            public static final String APIARY_ID = "apiary_id";
+            public static final String NAME_POINT = "name_point";
+            public static final String POSITION_POINT = "position_point";
+        }
+    }
 }

@@ -81,10 +81,20 @@ public class DBHelper extends SQLiteOpenHelper {
                 + ApiarisDatabaseSchema.TableApiaries.Cols.LONGITUDE + " real)"
         );
 
+        db.execSQL("create table "
+                + ApiarisDatabaseSchema.TablePoints.NAME_TABLE_POINTS + "( "
+                + ApiarisDatabaseSchema.TablePoints.Cols._ID + " integer primary key autoincrement, "
+                + ApiarisDatabaseSchema.TablePoints.Cols.DIRECTOR_ID + " integer not null, "
+                + ApiarisDatabaseSchema.TablePoints.Cols.APIARY_ID + " integer not null, "
+                + ApiarisDatabaseSchema.TablePoints.Cols.NAME_POINT + " text not null, "
+                + ApiarisDatabaseSchema.TablePoints.Cols.POSITION_POINT + " text)"
+        );
+
         createFirstDataUsers(db);
         createDataInSavedUser(db);
         createFirstDataCompanies(db);
         createFirstDataApiaries(db);
+        createFirstDataPoints(db);
     }
 
     private void createDataInSavedUser(SQLiteDatabase db) {
@@ -203,6 +213,18 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(ApiarisDatabaseSchema.TableApiaries.Cols.NEAREST_SETTLEMENT, "2.Невідоме село гуцулів))");
 
         db.insert(ApiarisDatabaseSchema.TableApiaries.NAME_TABLE_APIARIES,
+                null, values);
+    }
+
+    private void createFirstDataPoints(SQLiteDatabase db){
+        ContentValues values = new ContentValues();
+
+        values.put(ApiarisDatabaseSchema.TablePoints.Cols.DIRECTOR_ID, 1);
+        values.put(ApiarisDatabaseSchema.TablePoints.Cols.APIARY_ID, 1);
+        values.put(ApiarisDatabaseSchema.TablePoints.Cols.NAME_POINT, "Точок 1");
+        values.put(ApiarisDatabaseSchema.TablePoints.Cols.POSITION_POINT, "Східна частина");
+
+        db.insert(ApiarisDatabaseSchema.TablePoints.NAME_TABLE_POINTS,
                 null, values);
     }
 

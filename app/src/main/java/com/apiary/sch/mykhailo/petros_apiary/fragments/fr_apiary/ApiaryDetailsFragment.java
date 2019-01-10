@@ -49,9 +49,10 @@ public class ApiaryDetailsFragment extends Fragment {
     public ApiaryDetailsFragment() {
     }
 
-    public static ApiaryDetailsFragment newInstance(BeeCompany company) {
+    public static ApiaryDetailsFragment newInstance(BeeCompany company, Apiary apiary) {
         ApiaryDetailsFragment fragment = new ApiaryDetailsFragment();
         fragment.mBeeCompany = company;
+        fragment.mApiary = apiary;
         return fragment;
     }
 
@@ -91,14 +92,7 @@ public class ApiaryDetailsFragment extends Fragment {
             public void onClick(View v) {
                 ApiaryMainActivity.hideKeyboard(getActivity());
                 if (saveApiary()){
-                    Toast.makeText(getContext(),
-                            "ЗБЕРЕГТИ!!!", Toast.LENGTH_LONG)
-                            .show();
                     removeThisFragment();
-                } else {
-                    Toast.makeText(getContext(),
-                            "НЕ ___ ЗБЕРЕГТИ!!!", Toast.LENGTH_LONG)
-                            .show();
                 }
             }
         });
@@ -119,7 +113,15 @@ public class ApiaryDetailsFragment extends Fragment {
 
     // форма для редагування існуючого
     private void setChangeOptionsForEdit() {
+        mBtnSaveApiary.setText(R.string.details_apiary_btn_save_changes_apiary);
+        mBtnSaveApiary.setVisibility(View.VISIBLE);
+
         // TODO: зміна параметрів
+        mEtNameApiary.setText(mApiary.getNameApiary());
+        mEtRegionApiary.setText(mApiary.getRegion());
+        mEtNearestSettlementApiary.setText(mApiary.getNearestSettlement());
+        mEtLatitudeApiary.setText(""+mApiary.getLatitude());
+        mEtLongitudeApiary.setText(""+mApiary.getLongitude());
     }
 
     // форма для створення нового обєкта
@@ -137,7 +139,8 @@ public class ApiaryDetailsFragment extends Fragment {
         Apiary apiary = new Apiary();
 
         if (mIsEditDataApiary){
-            // TODO: зміна даних в клмпанії
+            apiary = mApiary.copy();
+            // TODO: зміна даних в пасіці
         }
 
         if (isCorrectName(mEtNameApiary.getText().toString())){
@@ -159,7 +162,7 @@ public class ApiaryDetailsFragment extends Fragment {
         }
 
         if (isCorrectName(mEtNearestSettlementApiary.getText().toString())){
-            apiary.setRegion(mEtNearestSettlementApiary.getText().toString());
+            apiary.setNearestSettlement(mEtNearestSettlementApiary.getText().toString());
         } else {
             Toast.makeText(getContext(), getResources().getString(
                     R.string.details_apiary_error_message_short_name
@@ -167,9 +170,17 @@ public class ApiaryDetailsFragment extends Fragment {
             return false;
         }
 
-        if (isCorrectCoordinats(mEtLatitudeApiary.getText().toString())){
+        double coordinate;
+        String sCoordinate = mEtLatitudeApiary.getText().toString();
+        if (sCoordinate.length() == 0){
+            coordinate = 0;
+        } else {
+           coordinate = new Double(sCoordinate);
+        }
+        if (isCorrectCoordinats(coordinate)){
             // TODO: правильне ввердення координат
-            apiary.setLatitude(0);
+
+            apiary.setLatitude(coordinate);
         } else {
             Toast.makeText(getContext(), getResources().getString(
                     R.string.details_apiary_error_message_coordint_error
@@ -177,9 +188,16 @@ public class ApiaryDetailsFragment extends Fragment {
             return false;
         }
 
-        if (isCorrectCoordinats(mEtLongitudeApiary.getText().toString())){
+
+        sCoordinate = mEtLongitudeApiary.getText().toString();
+        if (sCoordinate.length() == 0){
+            coordinate = 0;
+        } else {
+            coordinate = new Double(sCoordinate);
+        }
+        if (isCorrectCoordinats(coordinate)){
             // TODO: правильне ввердення координат
-            apiary.setLongitude(0);
+            apiary.setLongitude(coordinate);
         } else {
             Toast.makeText(getContext(), getResources().getString(
                     R.string.details_apiary_error_message_coordint_error
@@ -188,14 +206,16 @@ public class ApiaryDetailsFragment extends Fragment {
         }
 
         if (mIsCreateNewApiary){
-            //TODO: збереження в БД
             apiary.setIdCompany(mBeeCompany.getIdCompany());
             apiary.setIdDirector(mBeeCompany.getIdDirector());
-            ApiaryAccess.get(getActivity()).addApiary(apiary);
+            long id = ApiaryAccess.get(getActivity()).addApiary(apiary);
+            if (id == -1){
+                return false;
+            }
         }
 
         if (mIsEditDataApiary){
-            //TODO: збереження змін в БД
+            ApiaryAccess.get(getActivity()).updateApiary(apiary);
         }
 
         return true;
@@ -207,7 +227,7 @@ public class ApiaryDetailsFragment extends Fragment {
         else return false;
     }
 
-    private boolean isCorrectCoordinats(String coordinat){
+    private boolean isCorrectCoordinats(Double coordinate){
         // TODO: перевірка правильності координат
         return true;
     }

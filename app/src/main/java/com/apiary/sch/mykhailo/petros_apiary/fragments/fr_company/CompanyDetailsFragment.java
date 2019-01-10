@@ -148,7 +148,10 @@ public class CompanyDetailsFragment extends Fragment{
 
         if (mIsCreateNewCompany){
             company.setIdDirector(User.get(getActivity()).getPersonUser().getIdDirector());
-            CompanyAccess.get(getActivity()).addCompany(company);
+            long id = CompanyAccess.get(getActivity()).addCompany(company);
+            if (id == -1){
+                return false;
+            }
         }
 
         if (mIsEditDataCompany){

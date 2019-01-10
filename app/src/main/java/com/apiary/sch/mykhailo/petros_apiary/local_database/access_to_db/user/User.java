@@ -184,9 +184,9 @@ public class User {
         return getPersonsFromWorkersByParameter(nameParameter, parameter);
     }
 
-    public void addWorker(Worker worker) {
+    public long addWorker(Worker worker) {
         ContentValues values = getContentValues(worker);
-        mDatabase.insert(ApiarisDatabaseSchema.TableOfWorkers.NAME_TABLE_OF_WORKERS,
+        return mDatabase.insert(ApiarisDatabaseSchema.TableOfWorkers.NAME_TABLE_OF_WORKERS,
                 null, values);
     }
 

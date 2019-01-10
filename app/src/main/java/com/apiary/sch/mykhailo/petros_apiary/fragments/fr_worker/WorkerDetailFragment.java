@@ -492,7 +492,10 @@ public class WorkerDetailFragment extends Fragment {
             User.get(getActivity()).updateWorker(worker);
             mWorker = worker;
         } else if (isCreateNew) {
-            User.get(getActivity()).addWorker(worker);
+            long id = User.get(getActivity()).addWorker(worker);
+            if (id == -1){
+                return false;
+            }
         }
 
         return true;
