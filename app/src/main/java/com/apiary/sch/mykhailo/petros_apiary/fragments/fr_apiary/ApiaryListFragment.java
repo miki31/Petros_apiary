@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apiary.sch.mykhailo.petros_apiary.R;
+import com.apiary.sch.mykhailo.petros_apiary.fragments.fr_point.PointListFragment;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.ApiaryAccess;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.user.User;
 import com.apiary.sch.mykhailo.petros_apiary.model.Apiary;
@@ -153,8 +154,8 @@ public class ApiaryListFragment extends Fragment {
             super(inflater.inflate(R.layout.list_item_apiary,
                     parent, false));
 
-//            для натискання на пункт
-//            itemView.setOnClickListener(this);
+//            для натискання на пункт списку
+            itemView.setOnClickListener(this);
 
             mApiaryNameTV = (TextView) itemView.findViewById(R.id.apiary_name);
             mApiaryRegionTV = (TextView) itemView.findViewById(R.id.apiary_region);
@@ -182,7 +183,7 @@ public class ApiaryListFragment extends Fragment {
                 public boolean onMenuItemClick(MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.menuPopApiaryEdit:
-                            Toast.makeText(getContext(), "Змінити",
+                            Toast.makeText(getContext(), "Змінити дані пасіки",
                                     Toast.LENGTH_LONG).show();
 
                             FragmentManager fragmentManager =
@@ -204,7 +205,9 @@ public class ApiaryListFragment extends Fragment {
                             return true;
 
                         case R.id.menuPopApiaryDelete:
-                            Toast.makeText(getContext(), "видалити.\n" +
+                            //TODO: видалення пасіки
+
+                            Toast.makeText(getContext(), "видалити пасіку.\n" +
                                             "Треба створити перевірку запитання чи дійсно видалити",
                                     Toast.LENGTH_LONG).show();
                             return true;
@@ -224,7 +227,6 @@ public class ApiaryListFragment extends Fragment {
             mApiaryNameTV.setText(mApiary.getNameApiary());
             mApiaryRegionTV.setText(mApiary.getRegion());
             mApiaryNearestSettlementTV.setText(mApiary.getNearestSettlement());
-
 
             if (backgroundColor == NOT_BACKGROUND_COLOR) {
                 return;
@@ -250,15 +252,23 @@ public class ApiaryListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            // TODO: перехід до вибору нищого рівня по ієрархії моделі даних
+            //перехід до вибору нищого рівня по ієрархії моделі даних
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            PointListFragment pointListFragment = PointListFragment.newInstance(mApiary);
 
             // TODO: при потребі тут створити і передати фрагменту бандл
 
+            fragmentTransaction.replace(R.id.fragment_container, pointListFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
         }
     }
 
 
-    private class ApiaryAdapter extends RecyclerView.Adapter<ApiaryHolder> {
+    private class ApiaryAdapter
+            extends RecyclerView.Adapter<ApiaryHolder> {
 
         private List<Apiary> mApiaries;
 

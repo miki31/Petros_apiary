@@ -6,6 +6,68 @@
     android:layout_margin="16dp"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/btn_save_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_apiary_btn_save_apiary"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:visibility="gone" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="11"
+                    android:text="@string/details_point_name"
+                    android:textAllCaps="false" />
+
+                <EditText
+                    android:id="@+id/et_name_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="?android:listSeparatorTextViewStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="11"
+                    android:text="@string/details_point_position"
+                    android:textAllCaps="false" />
+
+                <EditText
+                    android:id="@+id/et_position_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

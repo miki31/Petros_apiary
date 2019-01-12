@@ -151,5 +151,21 @@
     <string name="details_apiary_error_message_coordint_error">"         Coordinates are incorrect     "</string>
     <string name="details_apiary_error_message_short_name">"         The name entered is too short.          Minimum 3 characters     "</string>
 
+    <!-- Фрагмент з відображенням даних ТОЧКА-->
+    <string name="details_point_btn_save_point">Save</string>
+    <string name="details_point_btn_save_changes_point">Save changes</string>
+    <string name="details_point_name">Name point : </string>
+    <string name="details_point_position">Position : </string>
+
+    <!--Меню в списку ПАСІК на панелі toolbar-->
+    <string name="menu_point_list_item_add">Add new Point</string>
+    <!-- меню для кожного елемента списку ПАСІК-->
+    <string name="menu_point_from_item_edit">Edit</string>
+    <string name="menu_point_from_item_delete">Delete</string>
+
+    <!-- повідомлення про неправильні дані про "ТОЧОК" -->
+    <!-- ERROR MESSAGE -->
+    <string name="details_point_error_message_short_name">"         The name entered is too short.          Minimum 3 characters     "</string>
+
 
 </resources>

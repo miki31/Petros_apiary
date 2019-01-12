@@ -60,7 +60,7 @@
     <string name="menu_company_from_item_edit">Редагувати</string>
     <string name="menu_company_from_item_delete">Видалити</string>
     <string name="details_company_btn_save_changes_company">Зберегти зміни</string>
-    <string name="menu_apiary_list_item_add">Додати гову пасіку</string>
+    <string name="menu_apiary_list_item_add">Додати нову пасіку</string>
     <string name="details_apiary_btn_save_apiary">Зберегти</string>
     <string name="details_apiary_btn_save_changes_apiary">Зберегти зміни</string>
     <string name="details_apiary_name">Назва пасіки :</string>
@@ -72,4 +72,12 @@
     <string name="details_apiary_error_message_coordint_error">"         Невірні координати     "</string>
     <string name="menu_apiary_from_item_edit">Редаувати</string>
     <string name="menu_apiary_from_item_delete">Видалити</string>
+    <string name="details_point_btn_save_point">Зберегти</string>
+    <string name="details_point_btn_save_changes_point">Зберегти зміни</string>
+    <string name="details_point_name">Назва точка :</string>
+    <string name="details_point_position">Розташування :</string>
+    <string name="menu_point_from_item_edit">Редагувати</string>
+    <string name="menu_point_from_item_delete">Видалити</string>
+    <string name="menu_point_list_item_add">Додати новий точок</string>
+    <string name="details_point_error_message_short_name">"         Назва занадто коротка.          Мінімум 3 символи     "</string>
 </resources>

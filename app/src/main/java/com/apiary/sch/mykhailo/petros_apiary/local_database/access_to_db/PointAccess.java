@@ -11,6 +11,7 @@ import com.apiary.sch.mykhailo.petros_apiary.local_database.DBHelper;
 import com.apiary.sch.mykhailo.petros_apiary.model.Apiary;
 import com.apiary.sch.mykhailo.petros_apiary.model.Point;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PointAccess {
@@ -32,8 +33,44 @@ public class PointAccess {
     }
 
     public List<Point> getPointsByApiaryId(long id) {
-        // TODO: ____ отримати дані з БД
-        return null;
+        List<Point> points = new ArrayList<>();
+
+        String nameParameters = ApiarisDatabaseSchema.TablePoints.Cols.APIARY_ID;
+        String parameter = String.valueOf(id);
+
+        ApiariesCursorWrapper cursor = queryPoint(
+                nameParameters + " = ?", new String[]{parameter});
+
+        try {
+            if (cursor.getCount() != 0){
+                cursor.moveToFirst();
+                while (!cursor.isAfterLast()){
+                    points.add(cursor.getPoint());
+                    cursor.moveToNext();
+                }
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return points;
+    }
+
+    public long addPoint(Point point){
+        ContentValues values = getContentValues(point);
+        return mDatabase.insert(
+                ApiarisDatabaseSchema.TablePoints.NAME_TABLE_POINTS,
+                null, values);
+    }
+
+    public void updatePoint(Point point){
+        ContentValues values = getContentValues(point);
+        mDatabase.update(
+                ApiarisDatabaseSchema.TablePoints.NAME_TABLE_POINTS,
+                values,
+                ApiarisDatabaseSchema.TablePoints.Cols._ID + " = ?",
+                new String[]{String.valueOf(point.getIdPoint())}
+        );
     }
 
     private ApiariesCursorWrapper queryPoint(

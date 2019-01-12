@@ -25,6 +25,16 @@ public class Point {
         mHives = new ArrayList<Hive>();
     }
 
+    private Point(Point point){
+        mIdPoint = point.mIdPoint;
+        mIdApiary = point.mIdApiary;
+        mIdDirector = point.mIdDirector;
+        mName = point.mName;
+        mPosition = point.mPosition;
+
+        mHives = new ArrayList<Hive>();
+    }
+
     public String getName() {
         return mName;
     }
@@ -71,5 +81,10 @@ public class Point {
 
     public void setHives(List<Hive> hives) {
         mHives = hives;
+    }
+
+    public Point copy(){
+        Point point = new Point(this);
+        return point;
     }
 }
