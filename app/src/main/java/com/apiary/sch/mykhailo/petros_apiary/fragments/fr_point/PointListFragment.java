@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.apiary.sch.mykhailo.petros_apiary.R;
+import com.apiary.sch.mykhailo.petros_apiary.fragments.fr_hive.HiveViewPagerFragment;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.PointAccess;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.user.User;
 import com.apiary.sch.mykhailo.petros_apiary.model.Apiary;
@@ -92,7 +93,7 @@ public class PointListFragment extends Fragment {
                         PointDetailsFragment.newInstance(null, mApiary);
 
                 Bundle args = new Bundle();
-                args.putBoolean(PointDetailsFragment.ARG_IS_CREATE_NEW_APIARY, true);
+                args.putBoolean(PointDetailsFragment.ARG_IS_CREATE_NEW_POINT, true);
                 detailsFragment.setArguments(args);
 
                 fragmentTransaction.replace(R.id.fragment_container, detailsFragment);
@@ -150,7 +151,7 @@ public class PointListFragment extends Fragment {
                     parent, false));
 
 //            для натискання на пункт списку
-//            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
 
             mPointNameTV = (TextView) itemView.findViewById(R.id.point_name);
             mPointPositionTV = (TextView) itemView.findViewById(R.id.point_position);
@@ -185,7 +186,7 @@ public class PointListFragment extends Fragment {
                                 PointDetailsFragment.newInstance(mPoint, mApiary);
 
                         Bundle args = new Bundle();
-                        args.putBoolean(PointDetailsFragment.ARG_IS_EDIT_DATA_APIARY, true);
+                        args.putBoolean(PointDetailsFragment.ARG_IS_EDIT_DATA_POINT, true);
                         detailsFragment.setArguments(args);
 
                         fragmentTransaction.replace(R.id.fragment_container, detailsFragment);
@@ -241,6 +242,22 @@ public class PointListFragment extends Fragment {
         public void onClick(View view) {
             // TODO: перехід до вибору нищого рівня по ієрархії моделі даних
             // перехід до вуликів
+            // TODO: TEST
+
+            Toast.makeText(getContext(),"asdfghj", Toast.LENGTH_LONG).show();
+
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            HiveViewPagerFragment hiveViewPagerFragment =
+                    HiveViewPagerFragment.newInstance(mApiary);
+
+            //  при потребі тут створити і передати фрагменту бандл
+
+            fragmentTransaction.replace(R.id.fragment_container, hiveViewPagerFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
 
             // TODO: при потребі тут створити і передати фрагменту бандл
 
@@ -261,7 +278,7 @@ public class PointListFragment extends Fragment {
         @Override
         public PointHolder onCreateViewHolder(
                 @NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
 
             return new PointHolder(inflater, parent);
         }

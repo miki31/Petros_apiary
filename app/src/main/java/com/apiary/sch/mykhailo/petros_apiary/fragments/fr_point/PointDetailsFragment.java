@@ -15,13 +15,12 @@ import com.apiary.sch.mykhailo.petros_apiary.ApiaryMainActivity;
 import com.apiary.sch.mykhailo.petros_apiary.R;
 import com.apiary.sch.mykhailo.petros_apiary.local_database.access_to_db.PointAccess;
 import com.apiary.sch.mykhailo.petros_apiary.model.Apiary;
-import com.apiary.sch.mykhailo.petros_apiary.model.BeeCompany;
 import com.apiary.sch.mykhailo.petros_apiary.model.Point;
 
 public class PointDetailsFragment extends Fragment {
 
-    public static final String ARG_IS_CREATE_NEW_APIARY = "is_create_new_apiary";
-    public static final String ARG_IS_EDIT_DATA_APIARY = "edit_data_apiary";
+    public static final String ARG_IS_CREATE_NEW_POINT = "is_create_new_point";
+    public static final String ARG_IS_EDIT_DATA_POINT = "edit_data_point";
 
     private boolean mIsCreateNewPoint;
     private boolean mIsEditDataPoint;
@@ -51,9 +50,9 @@ public class PointDetailsFragment extends Fragment {
 
         if (args != null) {
             mIsCreateNewPoint = args.getBoolean(
-                    ARG_IS_CREATE_NEW_APIARY, false);
+                    ARG_IS_CREATE_NEW_POINT, false);
             mIsEditDataPoint = args.getBoolean(
-                    ARG_IS_EDIT_DATA_APIARY, false);
+                    ARG_IS_EDIT_DATA_POINT, false);
         }
     }
 
@@ -73,9 +72,8 @@ public class PointDetailsFragment extends Fragment {
 
         mBtnSavePoint.setOnClickListener(v -> {
             ApiaryMainActivity.hideKeyboard(getActivity());
-            if (saveApiary()) {
+            if (savePoint()) {
                 removeThisFragment();
-                // TODO: збереження даних
             }
         });
 
@@ -114,7 +112,7 @@ public class PointDetailsFragment extends Fragment {
         getActivity().getSupportFragmentManager().popBackStack();
     }
 
-    private boolean saveApiary() {
+    private boolean savePoint() {
         Point point = new Point();
 
         if (mIsEditDataPoint) {

@@ -20,6 +20,8 @@ import com.apiary.sch.mykhailo.petros_apiary.model.part_hives.UnderRoof;
  */
 public class Hive {
 
+    private String mName;
+
     private Roof mRoof;// дах
     private UnderRoof mUnderRoof;// піддашник
     private Body mBody;// тіло що містить кілька корпусів
@@ -31,6 +33,11 @@ public class Hive {
         mMaxAmountOfFrame = maxAmountOfFrame;
     }
 
+    public String getName() {
+        return mName;
+    }
 
-
+    public void setName(String name) {
+        mName = name;
+    }
 }
